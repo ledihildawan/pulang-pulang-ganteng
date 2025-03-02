@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pulang-pulang Ganteng - Reservasi</title>
+    <!-- Normalize.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <!-- Satoshi Font -->
+    <link
+      href="https://fonts.cdnfonts.com/css/satoshi?styles=135009,135004,135005,135006,135007,135008,135002,135003,135000,135001"
+      rel="stylesheet"
+    />
+    <!-- Common Styles -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Page Specific Styles (remain unchanged) -->
+    <style>
+      /* reservation.css - Specific styles for the reservation form */
+
+      .instructions {
+        text-align: center;
+        color: var(--muted);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 450;
+      }
+
+      /* Form Elements */
+      form {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--text);
+        font-size: 0.875rem;
+      }
+
+      input,
+      select,
+      textarea {
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        background: #fff;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      input:user-invalid,
+      select:user-invalid,
+      textarea:user-invalid {
+        border-color: #dc2626;
+      }
+
+      input:user-invalid:focus,
+      select:user-invalid:focus,
+      textarea:user-invalid:focus {
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+      }
+
+      textarea::placeholder {
+        color: #94a3b8;
+        font-weight: 400;
+      }
+
+      select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.25em;
+      }
+
+      /* Checkbox */
+      .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin: 1rem 0;
+      }
+
+      .checkbox-container input {
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 1px solid var(--border);
+        border-radius: 0.375rem;
+        accent-color: var(--primary);
+        margin-top: 0.2rem;
+      }
+
+      .terms-text {
+        font-weight: 400;
+        font-size: 0.875rem;
+      }
+
+      /* Note */
+      .note {
+        font-size: 0.875rem;
+        color: var(--muted);
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pesan Janji Temu Anda</h1>
+      <p class="instructions">
+        Pilih waktu yang Anda inginkan di bawah ini. Tim kami akan mengonfirmasi
+        ketersediaan via WhatsApp setelah meninjau jadwal kami.
+      </p>
+
+      <form id="reservationForm" method="POST" action="submit_reservation.php">
+        <div class="form-group">
+          <label for="fullName">Nama Lengkap</label>
+          <input type="text" id="fullName" name="fullName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Nomor Telepon</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label for="appointmentDateTime"
+            >Tanggal & Waktu yang Diinginkan</label
+          >
+          <input
+            type="datetime-local"
+            id="appointmentDateTime"
+            name="appointmentDateTime"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="serviceType">Jenis Layanan</label>
+          <select id="serviceType" name="serviceType" required>
+            <option value="">Pilih Layanan</option>
+            <option value="haircut">Potong Rambut Premium</option>
+            <option value="beardTrim">Pembentukan Janggut</option>
+            <option value="combo">Paket Perawatan Lengkap</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="specialRequests">Permintaan Khusus</label>
+          <textarea
+            id="specialRequests"
+            name="specialRequests"
+            rows="3"
+            placeholder="Preferensi gaya tertentu atau catatan untuk tukang cukur kami..."
+          ></textarea>
+        </div>
+
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="termsAgreement"
+            name="termsAgreement"
+            required
+          />
+          <div class="terms-text">
+            <label for="termsAgreement">
+              Saya menyetujui
+              <a href="/terms.html" target="_blank" rel="noopener noreferrer">
+                syarat & ketentuan pembatalan
+              </a>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Ajukan Pemesanan</button>
+
+        <p class="note">
+          Setelah mengirim, Anda akan menerima detail konfirmasi via WhatsApp
+          dalam 24 jam. Kami memerlukan pemberitahuan pembatalan 12 jam
+          sebelumnya.
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
